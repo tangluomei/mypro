@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{cn}}<br>
+        <button @click="cn='aa'">1</button>
+        <button @click="cn='bb'">2</button>
+        <button @click="cn='cc'">3</button><br>
+        <component :is="cn"></component>
+    </div>
+    <template id="a">
+        <div style="background-color: pink;">
+            <h1>A</h1>
+        </div>
+    </template>
+    <template id="b">
+        <div style="background-color: aqua;">
+            <h1>B</h1>
+        </div>
+    </template>
+    <template id="c">
+        <div style="background-color: palegoldenrod;">
+            <h1>C</h1>
+        </div>
+    </template>
+    <script>
+        var a={
+               template:"#a",
+               data:function(){ return {} },
+                   methods:{}
+           }
+           var b={
+               template:"#b",
+               data:function(){ return {} },
+                   methods:{}
+           }
+           var c={
+               template:"#c",
+               data:function(){ return {} },
+                   methods:{}
+           }
+        new Vue({
+               el:"#app",
+               data:{
+                cn:""
+               },
+               methods:{},
+               components:{
+                   'aa':a,
+                   'bb':b,
+                   'cc':c
+               }
+           })
+   </script>
+</body>
+
+</html>

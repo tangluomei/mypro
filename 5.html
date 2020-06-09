@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+        <div id="app">
+            {{msg}}
+           
+            <input type="text"  v-model="msg"  >
+            <my-div  v-model="msg" 
+              @f="show"  :title="msg">
+            世界
+            </my-div>
+        </div>
+        <template id="mydiv">
+            <div style="border: 1px solid red;width: 400px;height: 350px;">
+                <h1>hello   <slot></slot></h1>
+                <h1>你好 <slot></slot> </h1>
+                <h1>{{count}}{{title}}</h1> 
+                <button @click="myshow" >点击</button> 
+                <input type="text"  :value="value" @input="$emit('input',$event.target.value)" >
+             </div>
+        </template>
+
+        <script>
+var  obj={count:1}
+// v-model  其实是个语法糖
+
+            // 全局注册组件
+            Vue.component('myDiv',{
+                template:"#mydiv",
+                props:['title','value'],
+                data:function(){
+                    return {count:1}
+                },
+                methods:{
+                    add(){
+                        console.log(this.title)
+                      this.count++;  
+                    },
+                    myshow(){
+                        this.$emit('f',1,2,2,3)
+                    }
+                }
+            })
+            new Vue({
+                el:"#app",
+                data:{
+                    msg:"hello"
+                },
+                methods: {
+                 
+                },
+
+            })
+
+        </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{msg}}
+        <input type="text" v-model="msg">
+        <cn :title="msg" @fun="add" :value="msg" @input="add"></cn>
+    </div>
+    <template id="tem" >
+        <div>
+            <h1>hello{{msg}}{{title}}</h1>
+            <button @click="show">点击1</button>
+            <button @click="myshow">点击2</button>
+            <input type="text" :value="value" @input="$emit('input', $event.target.value)">
+        </div>
+    </template>
+    <script>
+        Vue.component('cn',{
+            template:"#tem",
+            props:['title','value'],
+            data:function(){
+                return {msg:1}
+            },
+            methods:{
+                show(){
+                    this.msg++;
+                },
+                myshow(){
+                    this.$emit('fun');
+                }
+            }
+        })
+        new Vue({
+            el:"#app",
+            data:{
+                msg:"9",
+            },
+            methods:{
+                add(t){
+                    this.msg=t;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+        <div id="app">
+            <!--  这个两个按钮是用来改变变量comName的值  -->
+             <a href="#" @click.prevent="comName='login'">登录</a>
+             <a href="#" @click.prevent="comName='register'">注册</a>
+               <hr>
+             <!--  这是专门用来防止 组件的标记标签  -->
+             <!-- vue 提供的一个 component的标签来 展示指定名称的组件  -->
+                 <component :is="comName"></component>
+        </div>
+        <!-- 登录和注册的模板 -->
+        <template id="login">
+                <form action="">
+                    用户名: <input type="text" name="" id=""><br>
+                    密码:     <input type="text" name="" id=""><br>
+                    <input type="submit" value="登录">
+                </form>
+        </template>
+
+        <template id="register">
+            <form action="">
+                呢称: <input type="text" name="" id=""><br>
+                密码: <input type="text" name="" id=""><br>
+                再次数据密码:     <input type="text" name="" id="">
+                <input type="submit" value="注册">
+            </form>
+        </template>
+
+        <script>
+            var  login = {
+                template:"#login",
+                data:function(){ return {} },
+                methods:{}
+            }
+            var  register = {
+                template:"#register",
+                data:function(){ return  {} },
+                methods:{}
+            }
+
+                new Vue({
+                    el:"#app",
+                    data:{
+                        comName:""
+                    },
+                    methods: {
+                        
+                    },
+                    components:{
+                          'login':login,
+                          'register':register  
+                    }
+                })
+        </script>
+</body>
+</html>
